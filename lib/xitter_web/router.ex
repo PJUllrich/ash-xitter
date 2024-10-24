@@ -23,7 +23,14 @@ defmodule XitterWeb.Router do
   scope "/", XitterWeb do
     pipe_through :browser
 
+    # live "/tweets/:id/edit", TweetLive.Index, :edit
+
+    # live "/tweets/:id/show/edit", TweetLive.Show, :edit
+
     ash_authentication_live_session :authenticated_routes do
+      live "/tweets", TweetLive.Index, :index
+      live "/tweets/new", TweetLive.Index, :new
+      live "/tweets/:id", TweetLive.Show, :show
       # in each liveview, add one of the following at the top of the module:
       #
       # If an authenticated user must be present:
