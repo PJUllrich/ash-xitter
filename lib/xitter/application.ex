@@ -17,7 +17,8 @@ defmodule Xitter.Application do
       # Start a worker by calling: Xitter.Worker.start_link(arg)
       # {Xitter.Worker, arg},
       # Start to serve requests, typically the last entry
-      XitterWeb.Endpoint
+      XitterWeb.Endpoint,
+      {AshAuthentication.Supervisor, [otp_app: :xitter]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

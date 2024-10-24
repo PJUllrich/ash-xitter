@@ -1,4 +1,5 @@
 import Config
+config :xitter, token_signing_secret: "3d2kIGYODmzYHVGSVrR0l5wo1X/C1V8y"
 config :ash, disable_async?: true
 
 # Configure your database

@@ -61,7 +61,7 @@ config :xitter, XitterWeb.Endpoint,
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :xitter, dev_routes: true
+config :xitter, dev_routes: true, token_signing_secret: "dZfJ9JFnQe9uIv33s404tRhG5T9QDTa0"
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
