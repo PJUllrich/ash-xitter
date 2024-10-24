@@ -42,7 +42,7 @@ config :spark,
 config :xitter,
   ecto_repos: [Xitter.Repo],
   generators: [timestamp_type: :utc_datetime],
-  ash_domains: [Xitter.Accounts]
+  ash_domains: [Xitter.Tweets, Xitter.Accounts]
 
 # Configures the endpoint
 config :xitter, XitterWeb.Endpoint,

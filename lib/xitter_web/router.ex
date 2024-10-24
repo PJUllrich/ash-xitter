@@ -3,6 +3,8 @@ defmodule XitterWeb.Router do
 
   use AshAuthentication.Phoenix.Router
 
+  import AshAdmin.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -35,10 +37,17 @@ defmodule XitterWeb.Router do
     end
   end
 
+  scope "/" do
+    pipe_through :browser
+
+    ash_admin("/admin")
+  end
+
   scope "/", XitterWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+
     auth_routes AuthController, Xitter.Accounts.User, path: "/auth"
     sign_out_route AuthController
 

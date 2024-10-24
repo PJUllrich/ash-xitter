@@ -33,6 +33,7 @@ defmodule Xitter.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ash_admin, "~> 0.11"},
       {:picosat_elixir, "~> 0.2"},
       {:ash_authentication, "~> 4.1"},
       {:ash_authentication_phoenix, "~> 2.0"},

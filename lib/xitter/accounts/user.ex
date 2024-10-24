@@ -3,7 +3,7 @@ defmodule Xitter.Accounts.User do
     otp_app: :xitter,
     domain: Xitter.Accounts,
     authorizers: [Ash.Policy.Authorizer],
-    extensions: [AshAuthentication],
+    extensions: [AshAuthentication, AshAdmin.Resource],
     data_layer: AshPostgres.DataLayer
 
   authentication do
@@ -28,7 +28,13 @@ defmodule Xitter.Accounts.User do
     repo Xitter.Repo
   end
 
+  admin do
+    actor?(true)
+  end
+
   actions do
+    defaults [:read]
+
     read :get_by_subject do
       description "Get a user by the subject claim in a JWT"
       argument :subject, :string, allow_nil?: false
@@ -81,13 +87,17 @@ defmodule Xitter.Accounts.User do
       authorize_if always()
     end
 
-    policy always() do
-      forbid_if always()
+    policy action_type([:read, :update]) do
+      authorize_if expr(id == ^actor(:id))
+    end
+
+    policy action(:request_magic_link) do
+      authorize_if always()
     end
   end
 
   attributes do
-    uuid_primary_key :id
+    uuid_v7_primary_key :id
 
     attribute :email, :ci_string do
       allow_nil? false
